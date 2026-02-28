@@ -44,4 +44,4 @@ EXPOSE 8080
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["bark-server"]
+CMD ["/usr/local/bin/bark-server"]

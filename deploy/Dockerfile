@@ -6,15 +6,15 @@ WORKDIR /go/src/github.com/finb/bark-server
 
 RUN set -ex \
     && apk add git gcc libc-dev \
-    && BUILD_VERSION=$(git describe --tags) \
+    && BUILD_VERSION=$(git describe --tags 2>/dev/null || echo "unknown") \
     && BUILD_DATE=$(date "+%F %T") \
-    && COMMIT_SHA1=$(git rev-parse HEAD) \
+    && COMMIT_SHA1=$(git rev-parse HEAD 2>/dev/null || echo "unknown") \
     && go install -trimpath -ldflags \
-            "-X 'main.version=${BUILD_VERSION}' \
-             -X 'main.buildDate=${BUILD_DATE}' \
-             -X 'main.commitID=${COMMIT_SHA1}' \
-             -w -s"
-
+        "-X 'main.version=${BUILD_VERSION}' \
+        -X 'main.buildDate=${BUILD_DATE}' \
+        -X 'main.commitID=${COMMIT_SHA1}' \
+        -w -s"
+        
 FROM alpine
 
 LABEL maintainer="mritd <mritd@linux.com>"

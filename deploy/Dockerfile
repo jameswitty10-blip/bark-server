@@ -44,4 +44,4 @@ EXPOSE 8080
 
 RUN mkdir -p /data
 
-CMD ["/usr/local/bin/bark-server", "--data", "/data"]
+CMD ["sh", "-c", "echo 'Starting bark-server...' && /usr/local/bin/bark-server --data /data 2>&1"]

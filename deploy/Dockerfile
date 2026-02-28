@@ -19,13 +19,8 @@ FROM alpine
 
 LABEL maintainer="mritd <mritd@linux.com>"
 
-# set up nsswitch.conf for Go's "netgo" implementation
-# - https://github.com/golang/go/blob/go1.9.1/src/net/conf.go#L194-L275
-# - docker run --rm debian:stretch grep '^hosts:' /etc/nsswitch.conf
 RUN echo 'hosts: files dns' > /etc/nsswitch.conf
 
-# default timezone
-# override it with --build-arg TIMEZONE=xxxx
 ARG TIMEZONE=Asia/Shanghai
 
 ENV TZ=${TIMEZONE}
@@ -44,4 +39,4 @@ EXPOSE 8080
 
 RUN mkdir -p /data
 
-CMD ["sh", "-c", "echo 'Starting bark-server...' && /usr/local/bin/bark-server --data /data 2>&1"]
+CMD ["/usr/local/bin/bark-server", "-addr", "0.0.0.0:8080", "-data", "/data"]

@@ -37,7 +37,7 @@ RUN set -ex \
     && echo ${TZ} > /etc/timezone
 
 COPY --from=builder /go/bin/bark-server /usr/local/bin/bark-server
-COPY --from=builder /go/src/github.com/finb/bark-server/deploy/entrypoint.sh
+COPY --from=builder /go/src/github.com/finb/bark-server/deploy/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 EXPOSE 8080

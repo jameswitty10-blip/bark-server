@@ -39,9 +39,9 @@ func (p PushMessage) IsDelete() bool {
 }
 
 const (
-	topic          = "me.fin.bark"
-	keyID          = "LH4T9V5U4R"
-	teamID         = "5U8LBRXG3A"
+	topic          = "com.petere.bark"
+	keyID          = "5WMKA58SX6"
+	teamID         = "QPJDXPVN22"
 	PayloadMaximum = 4096
 )
 

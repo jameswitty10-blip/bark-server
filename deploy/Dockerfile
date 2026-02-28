@@ -14,7 +14,7 @@ RUN set -ex \
         -X 'main.buildDate=${BUILD_DATE}' \
         -X 'main.commitID=${COMMIT_SHA1}' \
         -w -s"
-        
+
 FROM alpine
 
 LABEL maintainer="mritd <mritd@linux.com>"
@@ -24,8 +24,8 @@ LABEL maintainer="mritd <mritd@linux.com>"
 # - docker run --rm debian:stretch grep '^hosts:' /etc/nsswitch.conf
 RUN echo 'hosts: files dns' > /etc/nsswitch.conf
 
-# default timezon
-# override it with `--build-arg TIMEZONE=xxxx`
+# default timezone
+# override it with --build-arg TIMEZONE=xxxx
 ARG TIMEZONE=Asia/Shanghai
 
 ENV TZ=${TIMEZONE}
@@ -42,4 +42,6 @@ RUN chmod +x /entrypoint.sh
 
 EXPOSE 8080
 
-CMD ["/usr/local/bin/bark-server"]
+RUN mkdir -p /data
+
+CMD ["/usr/local/bin/bark-server", "--data", "/data"]

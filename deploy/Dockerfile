@@ -39,8 +39,6 @@ RUN set -ex \
 COPY --from=builder /go/bin/bark-server /usr/local/bin/bark-server
 COPY --from=builder /go/src/github.com/finb/bark-server/deploy/entrypoint.sh /entrypoint.sh
 
-VOLUME /data
-
 EXPOSE 8080
 
 ENTRYPOINT ["/entrypoint.sh"]
